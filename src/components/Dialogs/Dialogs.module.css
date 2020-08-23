@@ -1,0 +1,19 @@
+.dialogs {
+  padding: 10px;
+}
+
+.dialogs h2 {
+  margin: 5px 0;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.usersBar {
+  margin-right: 50px;
+}
+
+.dialog.active {
+  color: gold;
+}

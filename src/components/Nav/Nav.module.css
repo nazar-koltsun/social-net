@@ -1,0 +1,18 @@
+.nav {
+  grid-area: nav;
+  padding: 10px 20px;
+  background-color: #328032;
+}
+
+.item a,
+.users_link {
+  display: block;
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.item a.active,
+.users_link.active {
+  color: gold;
+}
