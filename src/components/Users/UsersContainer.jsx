@@ -8,7 +8,8 @@ import {
 } from "../Redux/users-reducer";
 import { connect } from "react-redux";
 import Loader from "../common/Loader/Loader";
-import { usersApi } from "../../api/api";
+import { withAuthRedirect } from "../../hoc/AuthRedirect";
+import { compose } from "redux";
 
 
 let mapStateToProps = (state) => {
@@ -18,7 +19,8 @@ let mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress
+    followingInProgress: state.usersPage.followingInProgress,
+    isAuth: state.auth.isAuth
   };
 };
 
@@ -51,10 +53,15 @@ class UsersContainer extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  {
-    getUsers: getUsers,
-    follow: follow,
-    unFollow: unFollow
-  })(UsersContainer);
+export default compose(
+  connect(mapStateToProps, {getUsers, follow, unFollow}),
+  withAuthRedirect
+)(UsersContainer);
+
+// export default connect(
+//   mapStateToProps,
+//   {
+//     getUsers: getUsers,
+//     follow: follow,
+//     unFollow: unFollow
+//   })(UsersContainer)
