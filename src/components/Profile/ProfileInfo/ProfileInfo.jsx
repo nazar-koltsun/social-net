@@ -12,7 +12,10 @@ function ProfileInfo(props) {
             <img src="https://sites.google.com/site/prirodanasevseegooglgfgf/_/rsrc/1463456237313/home/priroda_gory_nebo_ozero_oblaka_81150_1920x1080.jpg" />
             <div className={s.descriptionBlock}>
                 <img src={props.userInfo.photos.large} alt="Avatar" />
-                <ProfileStatus status={"Hello my friends"} />
+                <ProfileStatus 
+                    status={props.status} 
+                    updateUserStatus={props.updateUserStatus}
+                />
             </div>
         </div>
     );
