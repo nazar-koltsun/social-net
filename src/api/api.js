@@ -57,3 +57,9 @@ export const authApi = {
             .get("auth/me");
     }
 };
+
+export const loginApi = {
+    validUserData(email, password) {
+        return instance.post("/auth/login", {email, password});
+    }
+}
