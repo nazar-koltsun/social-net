@@ -1,5 +1,4 @@
 import React from "react";
-import * as axios from "axios";
 import Users from "./Users";
 import {
   getUsers,
@@ -8,7 +7,6 @@ import {
 } from "../Redux/users-reducer";
 import { connect } from "react-redux";
 import Loader from "../common/Loader/Loader";
-import { withAuthRedirect } from "../../hoc/AuthRedirect";
 import { compose } from "redux";
 
 
@@ -55,13 +53,4 @@ class UsersContainer extends React.Component {
 
 export default compose(
   connect(mapStateToProps, {getUsers, follow, unFollow}),
-  withAuthRedirect
 )(UsersContainer);
-
-// export default connect(
-//   mapStateToProps,
-//   {
-//     getUsers: getUsers,
-//     follow: follow,
-//     unFollow: unFollow
-//   })(UsersContainer)

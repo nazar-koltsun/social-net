@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from '../common/FormControls/FormControls.module.css';
 import {login} from '../Redux/auth-reducer';
 import {connect} from "react-redux";
 import {Field, reduxForm} from 'redux-form';
@@ -36,12 +37,19 @@ const LoginForm = (props) => {
                 <Field component={Input} name="rememberMe" type={'checkbox'} />
                 remember me
             </div>
+            {
+                props.error && (
+                    <p className={styles.formSummaryError}>{props.error}</p>
+                ) 
+            }
+
             <button>Login</button>
         </form>
     );
 };
 
 const Login = (props) => {
+    console.log(props);
     const onSubmit = (formData) => {
         props.login(formData.email, formData.password, formData.rememberMe);
     }

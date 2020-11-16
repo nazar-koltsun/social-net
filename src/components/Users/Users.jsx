@@ -1,9 +1,7 @@
-import React from "react";
-import styles from "./Users.module.css";
-import userPhoto from "../../assets/img/user-default.png";
-import { NavLink } from "react-router-dom";
-import * as axios from "axios";
-import { usersApi } from "../../api/api";
+import React from 'react';
+import styles from './Users.module.css';
+import userDefaultPhoto from '../../assets/img/user-default.png';
+import { NavLink } from 'react-router-dom';
 
 function Users(props) {
     console.log(props);
@@ -24,7 +22,7 @@ function Users(props) {
                             className={
                                 props.currentPage === item
                                     ? styles.selectedPage
-                                    : ""
+                                    : ''
                             }
                             onClick={() => {
                                 props.onPageChanged(item);
@@ -40,26 +38,29 @@ function Users(props) {
                     <div key={user.id}>
                         <span>
                             <NavLink
-                                to={"/profile/" + user.id}
+                                to={'/profile/' + user.id}
                                 className={styles.user_link}
                             >
                                 <img
                                     className={styles.userPhoto}
+                                    width='70'
+                                    height= '70'
                                     src={
                                         user.photos.small != null
                                             ? user.photos.small
-                                            : userPhoto
+                                            : userDefaultPhoto
                                     }
-                                    alt="User avatar"
-                                    style={{ width: "70px" }}
+                                    alt='User avatar'
                                 />
                             </NavLink>
 
                             <div>
                                 {user.followed ? (
                                     <button
-                                        type="button"
-                                        disabled={props.followingInProgress.some(id => id == user.id)}
+                                        type='button'
+                                        disabled={props.followingInProgress.some(
+                                            (id) => id == user.id
+                                        )}
                                         onClick={() => {
                                             props.unFollow(user.id);
                                         }}
@@ -68,8 +69,10 @@ function Users(props) {
                                     </button>
                                 ) : (
                                     <button
-                                        type="button"
-                                        disabled={props.followingInProgress.some(id => id == user.id)}
+                                        type='button'
+                                        disabled={props.followingInProgress.some(
+                                            (id) => id == user.id
+                                        )}
                                         onClick={() => {
                                             props.follow(user.id);
                                         }}

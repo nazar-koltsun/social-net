@@ -1,6 +1,7 @@
 img {
   width: auto;
   max-width: 100%;
+  aspect-ratio: 16 / 9;
 }
 
 .app-wrapper {
