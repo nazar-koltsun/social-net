@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 import userPhoto from '../../assets/img/user-default.png';
 
 function Header(props) {
-    console.log(props.photos);
-
     let getUserPhoto = () => {
         if (props.photos) {
             if (props.photos.large != null) {

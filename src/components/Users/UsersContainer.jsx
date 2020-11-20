@@ -1,34 +1,52 @@
 import React from "react";
 import Users from "./Users";
 import {
-  getUsers,
+  requestUsers,
   follow,
   unFollow
 } from "../Redux/users-reducer";
+import {
+  getPageSize, 
+  getUsers,
+  getTotalUsersCount,
+  getCurrentPage,
+  getIsFetching, 
+  getFollowingInProgress} from '../Redux/users-selectors';
 import { connect } from "react-redux";
 import Loader from "../common/Loader/Loader";
 import { compose } from "redux";
 
 
+// let mapStateToProps = (state) => {
+//   return {
+//     users: state.usersPage.users,
+//     pageSize: state.usersPage.pageSize,
+//     totalUsersCount: state.usersPage.totalUsersCount,
+//     currentPage: state.usersPage.currentPage,
+//     isFetching: state.usersPage.isFetching,
+//     followingInProgress: state.usersPage.followingInProgress,
+//     isAuth: state.auth.isAuth
+//   };
+// };
+
 let mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress,
-    isAuth: state.auth.isAuth
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowingInProgress(state),
   };
 };
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.totalUsersCount);
+    this.props.requestUsers(this.props.currentPage, this.props.totalUsersCount);
   }
 
   onPageChanged = (pageNumber) => {
-    this.props.getUsers(pageNumber, this.props.pageSize);
+    this.props.requestUsers(pageNumber, this.props.pageSize);
   };
 
   render() {
@@ -39,6 +57,7 @@ class UsersContainer extends React.Component {
         ) : null}
         <Users
           totalUsersCount={this.props.totalUsersCount}
+          currentPage={this.props.currentPage}
           pageSize={this.props.pageSize}
           onPageChanged={this.onPageChanged}
           users={this.props.users}
@@ -52,5 +71,5 @@ class UsersContainer extends React.Component {
 }
 
 export default compose(
-  connect(mapStateToProps, {getUsers, follow, unFollow}),
+  connect(mapStateToProps, {requestUsers, follow, unFollow}),
 )(UsersContainer);

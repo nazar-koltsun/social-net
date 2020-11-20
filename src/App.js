@@ -18,7 +18,6 @@ class App extends React.Component {
     this.props.initializeApp();
   }
   render() {
-    console.log(`Initiallized: ${this.props.initialized}`);
     if (!this.props.initialized) {
       return <Loader />
     }

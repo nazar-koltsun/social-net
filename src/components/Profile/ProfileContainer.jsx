@@ -52,10 +52,3 @@ export default compose(
     connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus }),  
     withRouter,
 )(ProfileContainer);
-
-// let authRedirectComponent = withAuthRedirect(ProfileContainer);
-
-// let withUrlDataContainerComponent = withRouter(authRedirectComponent);
-// export default connect(mapStateToProps, { getUserProfile })(
-//     withUrlDataContainerComponent
-// );
