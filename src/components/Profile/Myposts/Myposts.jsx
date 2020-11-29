@@ -8,7 +8,7 @@ import {
 } from '../../../utils/validators/validators';
 import { Textarea } from '../../common/FormControls/FormControls';
 
-function Myposts(props) {
+const Myposts = React.memo(props => {
     let postItems = props.posts.map((post) => (
         <Post message={post.message} likeCount={post.like} key={post.id} />
     ));
@@ -24,7 +24,7 @@ function Myposts(props) {
             <ul className={classes.posts}>{postItems}</ul>
         </div>
     );
-}
+});
 
 let maxLength10 = maxLengthCreator(10);
 

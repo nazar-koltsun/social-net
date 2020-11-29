@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 const ProfileStatusWithHooks = (props) => {
-    console.log(props);
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);
 

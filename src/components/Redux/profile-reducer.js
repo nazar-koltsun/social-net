@@ -1,18 +1,19 @@
-import { usersApi } from "../../api/api";
-import { profileApi } from "../../api/api";
+import { usersApi } from '../../api/api';
+import { profileApi } from '../../api/api';
 
-const ADD_POST = "ADD-POST";
-const SET_USER_INFFO = "SET_USER_INFFO";
-const SET_STATUS = "SET_STATUS";
+const ADD_POST = 'ADD-POST';
+const SET_USER_INFFO = 'SET_USER_INFFO';
+const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
-    userInfo: null,
-    postsData: [
-        { id: 1, message: "Hi, how are you", like: "10" },
-        { id: 2, message: "It's me first post", like: "15" },
+    posts: [
+        { id: 1, message: 'Hi, how are you', like: '10' },
+        { id: 2, message: "It's me first post", like: '15' },
     ],
 
-    status: "",
+    profile: null,
+    status: '',
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -25,13 +26,13 @@ const profileReducer = (state = initialState, action) => {
             };
             return {
                 ...state,
-                postsData: [...state.postsData, newPost],
+                posts: [...state.posts, newPost],
             };
         }
         case SET_USER_INFFO: {
             return {
                 ...state,
-                userInfo: action.userInfo,
+                profile: action.profile,
             };
         }
         case SET_STATUS: {
@@ -40,19 +41,30 @@ const profileReducer = (state = initialState, action) => {
                 status: action.status,
             };
         }
+
+        case DELETE_POST: {
+            return {
+                ...state,
+                posts: [...state.posts].filter(post => post.id != action.id)
+            }
+        }
         default:
             return state;
     }
 };
 
-export const addPostActionCreator = (newPostText) => ({ type: ADD_POST, newPostText});
+export const addPostActionCreator = (newPostText) => ({
+    type: ADD_POST,
+    newPostText,
+});
 
-export const setUserInfo = (userInfo) => ({ type: SET_USER_INFFO, userInfo });
+export const setUserInfo = (profile) => ({ type: SET_USER_INFFO, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
+export const deletePost = (id) => ({ type: DELETE_POST, id });
 
 export const getUserProfile = (userId) => (dispatch) => {
     return usersApi.getProfile(userId).then((response) => {
-      dispatch(setUserInfo(response.data));
+        dispatch(setUserInfo(response.data));
     });
 };
 
@@ -69,7 +81,5 @@ export const updateUserStatus = (status) => (dispatch) => {
         }
     });
 };
-
-
 
 export default profileReducer;

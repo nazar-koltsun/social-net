@@ -13,7 +13,7 @@ import {Redirect} from 'react-router-dom';
 
 let mapStateToProps = (state) => {
     return {
-        userInfo: state.profilePage.userInfo,
+        profile: state.profilePage.profile,
         status: state.profilePage.status,
         isAuth: state.auth.isAuth,
         authUserId: state.auth.userId,
@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component {
         return (
             <Profile 
                 {...this.props} 
-                profile={this.props.userInfo} 
+                profile={this.props.profile} 
                 status={this.props.status} 
                 updateUserStatus={this.props.updateUserStatus}
             />

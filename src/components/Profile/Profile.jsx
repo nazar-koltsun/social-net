@@ -6,7 +6,7 @@ function Profile(props) {
   return (
     <div>
       <ProfileInfo 
-        userInfo={props.userInfo} 
+        profile={props.profile} 
         status={props.status} 
         updateUserStatus={props.updateUserStatus} 
       />
