@@ -4,18 +4,18 @@ import s from "./ProfileInfo.module.css";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userDefaultPhoto from '../../../assets/img/user-default.png';
 
-function ProfileInfo(props) {
-    if (!props.profile) {
+function ProfileInfo({profile, status, updateUserStatus}) {
+    if (!profile) {
         return <Loader />;
     }
     return (
         <div>
             <img src="https://sites.google.com/site/prirodanasevseegooglgfgf/_/rsrc/1463456237313/home/priroda_gory_nebo_ozero_oblaka_81150_1920x1080.jpg" />
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large || userDefaultPhoto} width='225' height='225' alt="Avatar" />
+                <img src={profile.photos.large || userDefaultPhoto} width='225' height='225' alt="Avatar" />
                 <ProfileStatusWithHooks 
-                    status={props.status} 
-                    updateUserStatus={props.updateUserStatus}
+                    status={status} 
+                    updateUserStatus={updateUserStatus}
                 />
             </div>
         </div>

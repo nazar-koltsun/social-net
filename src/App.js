@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Nav from './components/Nav/Nav';
@@ -7,7 +7,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import LoginPage from './components/Login/Login';
-
+import {compose} from "redux";
 import Loader from './components/common/Loader/Loader';
 
 import {initializeApp} from './components/Redux/app-reducer';
@@ -41,4 +41,8 @@ const mapStatetoProps = (state) => ({
   initialized: state.app.initialized
 });
 
-export default connect(mapStatetoProps, {initializeApp})(App);
+// export default connect(mapStatetoProps, {initializeApp})(App);
+
+export default compose(
+  withRouter,
+  connect(mapStatetoProps, {initializeApp}))(App);
