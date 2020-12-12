@@ -1,5 +1,8 @@
 import React from 'react';
 import {Route, withRouter} from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
+import store from "./components/Redux/redux-store";
+import { Provider } from "react-redux";
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Nav from './components/Nav/Nav';
@@ -41,8 +44,18 @@ const mapStatetoProps = (state) => ({
   initialized: state.app.initialized
 });
 
-// export default connect(mapStatetoProps, {initializeApp})(App);
-
-export default compose(
+let AppContainer = compose(
   withRouter,
   connect(mapStatetoProps, {initializeApp}))(App);
+
+const SamuraiJSApp = (props) => {
+    return (
+      <BrowserRouter>
+        <Provider store={store}>
+          <AppContainer />
+        </Provider>
+      </BrowserRouter>
+    )
+}
+
+export default SamuraiJSApp;
