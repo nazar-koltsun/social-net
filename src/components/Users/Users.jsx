@@ -1,5 +1,6 @@
 import React from 'react';
 import User from './User';
+import styles from './Users.module.css';
 import Paginator from '../common/Paginator/Paginator';
 
 function Users({
@@ -12,12 +13,15 @@ function Users({
 }) {
     return (
         <div>
-            <Paginator
-                currentPage={currentPage}
-                onPageChanged={onPageChanged}
-                totalUsersCount={totalUsersCount}
-                pageSize={pageSize}
-            />
+            <div className={styles.usersPagination}>
+                <Paginator
+                    className={styles.usersPagination}
+                    currentPage={currentPage}
+                    onPageChanged={onPageChanged}
+                    totalItemsCount={totalUsersCount}
+                    pageSize={pageSize}
+                />
+            </div>
             {users.map((user) => {
                 return (
                     <div key={user.id}>
