@@ -4,6 +4,12 @@
   background-color: #328032;
 }
 
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .item a,
 .users_link {
   display: block;
