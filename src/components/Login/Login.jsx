@@ -16,28 +16,10 @@ const mapStateToProps = (state) => {
 const LoginForm = ({ handleSubmit, error }) => {
     return (
         <form onSubmit={handleSubmit}>
-            <Field
-                    component={Input}
-                    name='email'
-                    placeholder={'Email'}
-                    validate={[required]}
-                />
-            {/* {createField(Input, 'email', 'Email', [required])} */}
-
-            <Field
-                    component={Input}
-                    name='password'
-                    type='password'
-                    placeholder={'Password'}
-                    validate={[required]}
-                />
-            {/* {createField(Input, 'password', 'Password', [required], {type: 'password'})} */}
-            
-            <Field component={Input} name='rememberMe' type={'checkbox'} />
-            {/* {createField(Input, 'rememberMe', null, null, {type: 'checkbox'}, 'remember me')} */}
-            {console.log(error)}
+            {createField(Input, 'email', 'Email', [required])}
+            {createField(Input, 'password', 'Password', [required], {type: 'password'})}
+            {createField(Input, 'rememberMe', null, null, {type: 'checkbox'}, 'remember me')}
             {error && <p className={styles.formSummaryError}>{error}</p>}
-
             <button>Login</button>
         </form>
     );
