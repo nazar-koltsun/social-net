@@ -1,10 +1,10 @@
-import * as axios from "axios";
+import * as axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: "https://social-network.samuraijs.com/api/1.0/",
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        "APi-KEY": "23593d60-c22c-47da-81ff-747dcfc87e16",
+        'APi-KEY': '23593d60-c22c-47da-81ff-747dcfc87e16',
     },
 });
 
@@ -33,61 +33,54 @@ export const usersApi = {
 
 export const profileApi = {
     getProfile(userId) {
-        return instance.get(
-            `profile/${userId}`
-        );
+        return instance.get(`profile/${userId}`);
     },
 
     getStatus(userId) {
-        return instance.get(
-            `profile/status/${userId}`
-        );
+        return instance.get(`profile/status/${userId}`);
     },
 
     updateStatus(status) {
-        return instance.put(
-            'profile/status', {status: status}
-        );
+        return instance.put('profile/status', { status: status });
     },
 
     saveProfile(profile) {
-        return instance.put(
-            'profile', profile
-        )
+        return instance.put('profile', profile);
     },
 
     savePhoto(photoFile) {
         const formData = new FormData();
         formData.append('image', photoFile);
-        return instance.put(
-            'profile/photo', 
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }
-        );
-    }
+        return instance.put('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+    },
 };
 
 export const authApi = {
     me() {
-        return instance
-            .get("auth/me");
+        return instance.get('auth/me');
     },
 
-    login(email, password, rememberMe = false) {
-        return instance.post("/auth/login", {email, password, rememberMe});
+    login(email, password, rememberMe = false, captcha = null) {
+        return instance.post('auth/login', { email, password, rememberMe, captcha });
     },
 
     logout() {
-        return instance.delete("/auth/login");
-    }
+        return instance.delete('auth/login');
+    },
 };
 
 export const loginApi = {
     validUserData(email, password) {
-        return instance.post("/auth/login", {email, password});
-    }
-}
+        return instance.post('auth/login', { email, password });
+    },
+};
+
+export const securityApi = {
+    getCaptchaUrl() {
+        return instance.get('security/get-captcha-url');
+    },
+};
