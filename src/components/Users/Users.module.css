@@ -1,3 +1,8 @@
 .usersPagination {
     margin: 10px 0;
 }
+
+.userPhoto {
+    width: 70px;
+    height: 70px;
+}

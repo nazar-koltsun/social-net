@@ -4,8 +4,13 @@
   background-color: #328032;
 }
 
-.header img {
+.logo {
   width: 60px;
+}
+
+.userPhoto {
+  width: 60px;
+  height: 60px;
 }
 
 .loginBlock {
