@@ -76,19 +76,19 @@ export const addPostActionCreator = (newPostText: string):AddPostActionCreatorTy
 });
 
 type SetUserInfoType = {
-    type: typeof SET_USER_INFFO 
+    type: typeof SET_USER_INFFO
     profile: ProfileType
 }
 export const setUserInfo = (profile: ProfileType): SetUserInfoType => ({ type: SET_USER_INFFO, profile });
 
 type SetStatusType = {
-    type: typeof SET_STATUS 
+    type: typeof SET_STATUS
     status: string
 }
 export const setStatus = (status: string): SetStatusType => ({ type: SET_STATUS, status });
 
 type DeletePostType = {
-    type: typeof DELETE_POST 
+    type: typeof DELETE_POST
     id: number
 }
 export const deletePost = (id: number): DeletePostType => ({ type: DELETE_POST, id });
