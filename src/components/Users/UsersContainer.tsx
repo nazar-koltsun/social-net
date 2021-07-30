@@ -1,6 +1,6 @@
 import React from 'react';
 import Users from './Users';
-import { requestUsers, follow, unFollow, toggleFollowingInProgress, setCurrentPage } from '../Redux/users-reducer';
+import { requestUsers, follow, unFollow } from '../Redux/users-reducer';
 import {
     getPageSize,
     getUsers,
