@@ -23,19 +23,19 @@ const ProfileDataForm = ({handleSubmit, initialValues, error}) => {
             <button onClick={() => {}}>Save</button>
             <div>
                 <b>Full name: </b>
-                {createField(Input, 'fullName', 'Ful Name', [])}
+                {createField('Ful Name', 'fullName', [], Input)}
             </div>
             <div>
                 <b>Looking for a job: </b>
-                {createField(Input, 'LookingForAJob', '', [], {type: 'checkbox'})}
+                {createField('', 'LookingForAJob', [], Input, {type: 'checkbox'})}
             </div>
             <div>
                 <b>My professional skills: </b>
-                {createField(Textarea, 'lookingForAJobDescription', 'My proffesional skills', [], {type: 'checkbox'})}
+                {createField('My proffesional skills', 'lookingForAJobDescription', [], Textarea, {type: 'checkbox'})}
             </div>
             <div>
                 <b>About me: </b>
-                {createField(Input, 'aboutMe', 'about Me', [])}
+                {createField('about Me', 'aboutMe', [], Input)}
             </div>
             <div>
                 <b>Socials</b>
@@ -43,7 +43,7 @@ const ProfileDataForm = ({handleSubmit, initialValues, error}) => {
                     return (
                         <div className={styles.contact} key={social}>
                             {social}
-                            {createField(Input, 'contacts.' + social, social, [])}
+                            {createField(social, 'contacts.' + social, [], Input)}
                             {error && showError(error, social)}
                         </div>
                     );
