@@ -1,18 +1,18 @@
 import { ResultCodeEnum } from '../../api/api';
 import { profileApi } from '../../api/profile-api';
 import { FormAction, stopSubmit } from "redux-form";
-import { PhotosType, PostsType, ContactsType, ProfileType } from '../../types/types';
-import { AppStateType, BaseThunkType, InferActionsTypes } from './redux-store';
-import { ThunkAction } from 'redux-thunk';
+import { PhotosType, PostsType, ProfileType } from '../../types/types';
+import { BaseThunkType, InferActionsTypes } from './redux-store';
 
 let initialState = {
-    posts: [
+    posts: [ 
         { id: 1, message: 'Hi, how are you', like: 10 },
         { id: 2, message: "It's me first post", like: 15 },
     ] as Array<PostsType>,
 
     profile: null as ProfileType | null,
     status: '',
+    profileEditSuccess: false,
 };
 
 const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -44,7 +44,7 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
         case 'SN/PROFILE/DELETE_POST': {
             return {
                 ...state,
-                posts: [...state.posts].filter(post => post.id != action.id)
+                posts: [...state.posts].filter(post => post.id !== action.id)
             }
         }
 
@@ -68,7 +68,7 @@ export const actions = {
     setUserInfo: (profile: ProfileType) => ({ type: 'SN/PROFILE/SET_USER_INFFO', profile } as const),
     setStatus: (status: string) => ({ type: 'SN/PROFILE/SET_STATUS', status } as const), 
     deletePost: (id: number) => ({ type: 'SN/PROFILE/DELETE_POST', id } as const),
-    savePhotoSuccess: (photos: any) => ({ type: 'SN/PROFILE/SAVE_PHOTO_SUCCESS', photos } as const),
+    savePhotoSuccess: (photos: PhotosType) => ({ type: 'SN/PROFILE/SAVE_PHOTO_SUCCESS', photos } as const),
 }
 
 export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {

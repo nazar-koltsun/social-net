@@ -1,41 +1,51 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import Loader from '../../common/Loader/Loader';
 import s from './ProfileInfo.module.css';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import ProfileDataReduxForm from './ProfileDataForm';
 import userPhoto from '../../../assets/img/user-default.png';
 import { useState } from 'react';
+import { ContactsType, ProfileType } from '../../../types/types';
 
-function ProfileInfo({
+type ProfileInfoPropsType = {
+    profile: ProfileType | null
+    isOwner: boolean
+    status: string
+    updateUserStatus: (status: string) => void
+    saveProfile: (profile: ProfileType) => Promise<void>
+    savePhoto: (file: File) => void
+}
+
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
     profile,
     status,
     updateUserStatus,
     isOwner,
     savePhoto,
     saveProfile
-}) {
+}) => {
     let [editMode, setEditMode] = useState(false);
     
     if (!profile) {
         return <Loader />;
     }
-
-
-    const mainPhotoSelected = (e) => {
-        if (e.target.files.length) {
+    
+    const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>): void => {
+        if (e.target.files && e.target.files.length) {
             savePhoto(e.target.files[0]);
         }
     };
 
-    const onSubmit = (formData) => {
+    const onSubmit = (formData: ProfileType) => {
         saveProfile(formData).then(() => {
+            console.log(formData);
             setEditMode(false) 
         })
     }
 
     return (
         <div>
-            <img src='https://sites.google.com/site/prirodanasevseegooglgfgf/_/rsrc/1463456237313/home/priroda_gory_nebo_ozero_oblaka_81150_1920x1080.jpg' />
+            <img src='https://sites.google.com/site/prirodanasevseegooglgfgf/_/rsrc/1463456237313/home/priroda_gory_nebo_ozero_oblaka_81150_1920x1080.jpg' alt="Profile background" />
             <div className={s.descriptionBlock}>
                 <img
                     src={profile.photos.large || userPhoto}
@@ -49,14 +59,20 @@ function ProfileInfo({
                     updateUserStatus={updateUserStatus}
                 />
 
-                { editMode ? <ProfileDataReduxForm initialValues={profile} onSubmit={onSubmit} /> : 
+                { editMode ? <ProfileDataReduxForm profile={profile} onSubmit={onSubmit} /> : 
                 <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)} /> }
             </div>
         </div>
     );
 }
 
-const ProfileData = ({profile, isOwner, goToEditMode}) => {
+type ProfileDataPropsType = {
+    profile: ProfileType
+    isOwner: boolean
+    goToEditMode: () => void
+}
+
+const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEditMode}) => {
     return (
         <div>
             {isOwner && <button type='button' onClick={goToEditMode}>Edit</button>}
@@ -80,12 +96,13 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
             </div>
             <div>
                 <b>Contacts</b>:{' '}
+                
                 {Object.keys(profile.contacts).map((key) => {
                     return (
                         <Contacts
                             key={key}
                             contactTitle={key}
-                            contactValue={profile.contacts[key]}
+                            contactValue={profile.contacts[key as keyof ContactsType]}
                         />
                     );
                 })}
@@ -94,7 +111,12 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
     );
 };
 
-const Contacts = ({ contactTitle, contactValue = '' }) => {
+type ConContactsType = {
+    contactTitle: string
+    contactValue: string
+}
+
+const Contacts = ({ contactTitle, contactValue = '' }: ConContactsType) => {
     return (
         <div className={s.contact}>
             <b>{contactTitle}</b>: {contactValue}

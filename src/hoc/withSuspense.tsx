@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
 import Loader from '../components/common/Loader/Loader';
 
-const withSuspense = (Component) => {
-    return (props) => {
+export function withSuspense<WCP>(WrappedComponent: React.ComponentType<WCP>) {
+    return (props: WCP) => {
         return <Suspense fallback={<Loader />} >
-            <Component {...props} />
+            <WrappedComponent {...props} />
         </Suspense>
     };
 } 

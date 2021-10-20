@@ -1,18 +1,16 @@
 import React from 'react';
 import classes from './Header.module.css';
 import { NavLink } from 'react-router-dom';
-import userPhoto from '../../assets/img/user-default.png';
 
-function Header(props) {
-    let getUserPhoto = () => {
-        if (props.photos) {
-            if (props.photos.large != null) {
-                return props.photos.large;
-            }
-        }
-        return userPhoto;
-    };
+export type MapPropsType = {
+    isAuth: boolean
+    login: string | null
+}
+export type DispatchPropsType = {
+    logout: () => void
+}
 
+const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
     return (
         <header className={classes.header}>
             <img
@@ -24,11 +22,6 @@ function Header(props) {
             <div className={classes.loginBlock}>
                 {props.isAuth ? (
                     <div>
-                        <img
-                            className={classes.userPhoto}
-                            src={getUserPhoto()}
-                            alt=''
-                        />
                         <div>{props.login}</div>
                         <button onClick={() => {props.logout();}}>
                             Log out

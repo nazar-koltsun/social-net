@@ -23,7 +23,6 @@ const authReducer = (
         case 'SN/auth/SET_USER_DATA':
         case 'SN/auth/GET_CAPTCHA_URL_SUCCESS':
             return {
-                userId: 'sflsdjfsd',
                 ...state,
                 ...action.payload,
             }

@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Nav.module.css';
 import { NavLink } from 'react-router-dom';
 
-function Nav() {
+const Nav: React.FC = () => {
     return (
         <nav className={classes.nav}>
             <ul>
@@ -26,13 +26,13 @@ function Nav() {
                     </NavLink>
                 </li>
                 <li className={classes.item}>
-                    <a>News</a>
+                    <a href='link'>News</a>
                 </li>
                 <li className={classes.item}>
-                    <a>Music</a>
+                    <a href='link'>Music</a>
                 </li>
                 <li className={classes.item}>
-                    <a>Settings</a>
+                    <a href='link'>Settings</a>
                 </li>
             </ul>
         </nav>

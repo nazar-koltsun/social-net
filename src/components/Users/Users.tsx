@@ -32,6 +32,7 @@ let Users: React.FC<PropsType> = ({
                     pageSize={pageSize}
                 />
             </div>
+            {console.log(users.length)}
             {users.map((user) => {
                 return (
                     <div key={user.id}>
