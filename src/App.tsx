@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Nav from './components/Nav/Nav';
-import UsersContainer from './components/Users/UsersContainer';
-import LoginPage from './components/Login/Login';
+import UsersPage from './components/Users/UsersPage';
+import { LoginPage } from './components/Login/Login';
 import { compose } from 'redux';
 import Loader from './components/common/Loader/Loader';
 import { initializeApp } from './components/Redux/app-reducer';
@@ -65,7 +65,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                             path='/dialogs'
                             render={() => <SuspendedDialogs />}/>
 
-                        <Route path='/users' render={() => <UsersContainer pageTitle={"Cамурай"} />} />
+                        <Route path='/users' render={() => <UsersPage pageTitle={"Cамурай"} />} />
                         <Route path='/login' render={() => <LoginPage />} />
                         <Route path='*' render={() => <div>404 NOT FOUND</div>} />
                     </Switch>

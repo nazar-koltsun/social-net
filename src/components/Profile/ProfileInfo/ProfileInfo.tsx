@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import Loader from '../../common/Loader/Loader';
 import s from './ProfileInfo.module.css';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
@@ -6,24 +6,33 @@ import ProfileDataReduxForm from './ProfileDataForm';
 import userPhoto from '../../../assets/img/user-default.png';
 import { useState } from 'react';
 import { ContactsType, ProfileType } from '../../../types/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../Redux/redux-store';
+import { savePhoto, saveProfile  } from '../../Redux/profile-reducer';
+import { useParams } from 'react-router';
 
-type ProfileInfoPropsType = {
-    profile: ProfileType | null
-    isOwner: boolean
-    status: string
-    updateUserStatus: (status: string) => void
-    saveProfile: (profile: ProfileType) => Promise<void>
-    savePhoto: (file: File) => void
-}
+type ProfileInfoPropsType = {}
 
-const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
-    profile,
-    status,
-    updateUserStatus,
-    isOwner,
-    savePhoto,
-    saveProfile
-}) => {
+const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
+    const profile = useSelector((state: AppStateType) => state.profilePage.profile);
+
+    type ParamsType = {
+        userId?: string | undefined
+    }
+    const params: ParamsType = useParams();
+
+    const isOwner = !params.userId;
+
+    const dispatch = useDispatch();
+
+    const saveUserPhoto = (file: File) => {
+        dispatch(savePhoto(file));
+    }
+
+    const saveUserProfile = (formData: ProfileType) => {
+        dispatch(saveProfile(formData));
+    }
+    
     let [editMode, setEditMode] = useState(false);
     
     if (!profile) {
@@ -32,15 +41,13 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
     
     const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.files && e.target.files.length) {
-            savePhoto(e.target.files[0]);
+            saveUserPhoto(e.target.files[0]);
         }
     };
 
-    const onSubmit = (formData: ProfileType) => {
-        saveProfile(formData).then(() => {
-            console.log(formData);
-            setEditMode(false) 
-        })
+    const onSubmit = async (formData: ProfileType) => {
+        await saveUserProfile(formData)
+        setEditMode(false);
     }
 
     return (
@@ -54,10 +61,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                 />
                 {isOwner && <input type='file' onChange={mainPhotoSelected} />}
 
-                <ProfileStatusWithHooks
-                    status={status}
-                    updateUserStatus={updateUserStatus}
-                />
+                <ProfileStatusWithHooks />
 
                 { editMode ? <ProfileDataReduxForm profile={profile} onSubmit={onSubmit} /> : 
                 <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)} /> }
