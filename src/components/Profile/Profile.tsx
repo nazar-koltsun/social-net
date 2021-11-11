@@ -1,5 +1,4 @@
 import React from 'react';
-import { ProfileType } from '../../types/types';
 import MypostsContainer from './Myposts/MypostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 

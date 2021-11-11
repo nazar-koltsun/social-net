@@ -1,26 +1,42 @@
-.header {
-  grid-area: header;
-  padding: 10px 20px;
-  background-color: #328032;
-}
-
 .logo {
   width: 60px;
-}
-
-.userPhoto {
-  width: 60px;
-  height: 60px;
-}
-
-.loginBlock {
-  float: right;
 }
 
 .loginBlock a {
   color: #ffffff;
 }
 
-.userPhoto {
-  border-radius: 50%;
+.userName {
+  color: #ffffff;
+}
+
+.userName {
+  display: block;
+  max-width: 150px; 
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  white-space: nowrap
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding-top: 15px !important;
+  }
+
+  .headerLinksList {
+    padding: 15px 0;
+  }
+
+  .logoWrapper,
+  .headerLinksWrapper,
+  .loginBlockWrapper {
+    flex-basis: 100% !important;
+  }
+  
+  .headerLinksList,
+  .logoWrapper,
+  .loginBlockRow {
+    display: flex;
+    justify-content: center;
+  }
 }

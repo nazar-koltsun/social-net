@@ -1,20 +1,10 @@
+:root {
+  --content-max-width: 1500px;
+  --content-padding: 0 15px;
+}
+
 img {
   width: auto;
   max-width: 100%;
   aspect-ratio: 16 / 9;
 }
-
-.app-wrapper {
-  display: grid;
-  grid-template-areas: 
-    "header header"
-    "nav content";
-  grid-template-columns: 300px 1fr;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.app-wrapper-content {
-  position: relative;
-  grid-area: content;
-} 
