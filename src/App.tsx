@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import './App.css';
 import 'antd/dist/antd.css';
 import AppHeader from './components/Header/Header';
-import Nav from './components/Nav/Nav';
 import UsersPage from './components/Users/UsersPage';
 import { LoginPage } from './components/Login/Login';
 import { compose } from 'redux';
@@ -15,11 +14,10 @@ import { initializeApp } from './components/Redux/app-reducer';
 import { connect } from 'react-redux';
 import withSuspense from './hoc/withSuspense';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { Layout, Menu, Breadcrumb, Avatar, Row, Col } from 'antd';
-import { autofill } from 'redux-form';
+import { Layout, Menu, Breadcrumb } from 'antd';
 
 const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 
 const DialogsContainer = React.lazy(() =>
@@ -30,6 +28,10 @@ const ProfileContainer = React.lazy(() =>
     import('./components/Profile/ProfileContainer')
 );
 
+const ChatPage = React.lazy(() =>
+    import('./pages/Chat/ChatPage')
+);
+
 type MapPropsType = ReturnType<typeof mapStatetoProps>;
 type DispatchPropsType = {
     initializeApp: () => void;
@@ -37,6 +39,7 @@ type DispatchPropsType = {
 
 const SuspendedDialogs = withSuspense(DialogsContainer);
 const SuspendedProfile = withSuspense(ProfileContainer);
+const SuspendedChatPage = withSuspense(ChatPage);
 
 class App extends React.Component<MapPropsType & DispatchPropsType> {
     catchAllUnhandledErrors(e: PromiseRejectionEvent) {
@@ -86,7 +89,9 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                     <Menu.Item key="5">
                                         <Link to='/developers'>Developers</Link>
                                     </Menu.Item>
-                                    <Menu.Item key="6">option6</Menu.Item>
+                                    <Menu.Item key="6">
+                                        <Link to='/chat'>Chat</Link>
+                                    </Menu.Item>
                                     <Menu.Item key="7">option7</Menu.Item>
                                     <Menu.Item key="8">option8</Menu.Item>
                                 </SubMenu>
@@ -112,6 +117,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
 
                                     <Route path='/developers' render={() => <UsersPage pageTitle={"Cамурай"} />} />
                                     <Route path='/login' render={() => <LoginPage />} />
+                                    <Route path='/chat' render={() => <SuspendedChatPage />} />
                                     <Route path='*' render={() => <div>404 NOT FOUND</div>} />
                                 </Switch>
                             </Content>

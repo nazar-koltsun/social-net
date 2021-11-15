@@ -19,7 +19,6 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(initStatus);
 
-
     useEffect(() => {
         setStatus(status);
     }, [initStatus]);

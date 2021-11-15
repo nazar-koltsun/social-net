@@ -1,14 +1,12 @@
 import React from 'react';
 import styles from '../common/FormControls/FormControls.module.css';
-import { login, getCaptchaUrl } from '../Redux/auth-reducer';
-import { connect } from 'react-redux';
+import { login } from '../Redux/auth-reducer';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Input, createField, GetStringKeys } from '../common/FormControls/FormControls';
 import { required } from '../../utils/validators/validators';
 import { Redirect } from 'react-router-dom';
 import { AppStateType } from '../Redux/redux-store';
 import { useDispatch, useSelector } from 'react-redux';
-
 
 type LoginFormOwnProps = {
     captchaUrl: string | null

@@ -5,7 +5,6 @@ import { Avatar, Button, Col, Menu, Row } from 'antd';
 import UserOutlined from '@ant-design/icons/lib/icons/UserOutlined';
 import { Layout } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppStateType } from '../Redux/redux-store';
 import { logout } from '../Redux/auth-reducer';
 import { selectLogin, selectIsAuth } from '../Redux/auth-selectors';
 
